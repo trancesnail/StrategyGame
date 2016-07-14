@@ -27,3 +27,16 @@
 *.exe
 *.out
 *.app
+
+
+*.exp
+*.sdf
+.vs
+Binaries/
+Build/
+Content/
+Debug/
+DerivedDataCache/
+Intermediate/
+Saved/
+x64/
