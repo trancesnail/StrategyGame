@@ -38,7 +38,7 @@ AStrategyBuilding::AStrategyBuilding(const FObjectInitializer& ObjectInitializer
 	TriggerBox->BodyInstance.SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	TriggerBox->BodyInstance.SetResponseToAllChannels(ECR_Ignore);
 	TriggerBox->BodyInstance.SetResponseToChannel(ECC_Pawn, ECR_Overlap);
-	TriggerBox->AttachParent = RootComponent;
+	TriggerBox->SetupAttachment(RootComponent);
 
 	bCanBeDamaged = false;
 

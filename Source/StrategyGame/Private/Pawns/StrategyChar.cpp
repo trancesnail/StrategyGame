@@ -227,7 +227,7 @@ void AStrategyChar::SetWeaponAttachment(UStrategyAttachment* Weapon)
 		// detach any existing weapon attachment
 		if (WeaponSlot )
 		{
-			WeaponSlot->DetachFromParent();
+			WeaponSlot->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
 		}
 
 		// attach this one
@@ -235,7 +235,7 @@ void AStrategyChar::SetWeaponAttachment(UStrategyAttachment* Weapon)
 		if (WeaponSlot )
 		{
 			WeaponSlot->RegisterComponent();
-			WeaponSlot->AttachTo(GetMesh(), WeaponSlot->AttachPoint);
+			WeaponSlot->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, WeaponSlot->AttachPoint);
 			UpdatePawnData();
 			UpdateHealth();
 		}
@@ -249,14 +249,14 @@ void AStrategyChar::SetArmorAttachment(UStrategyAttachment* Armor)
 		// detach any existing armor attachment
 		if (ArmorSlot )
 		{
-			ArmorSlot->DetachFromParent();
+			ArmorSlot->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
 		}
 		// attach this one
 		ArmorSlot = Armor;
 		if (ArmorSlot )
 		{
 			ArmorSlot->RegisterComponent();
-			ArmorSlot->AttachTo(GetMesh(), ArmorSlot->AttachPoint);
+			ArmorSlot->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, ArmorSlot->AttachPoint);
 			UpdatePawnData();
 			UpdateHealth();
 		}

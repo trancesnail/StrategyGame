@@ -19,7 +19,7 @@ AStrategyPlayerController::AStrategyPlayerController(const FObjectInitializer& O
 	PrimaryActorTick.bCanEverTick = true;
 	bHidden = false;
 	bShowMouseCursor = true;
-	UE_LOG(LogGame, Error, TEXT("AStrategyPlayerController::AStrategyPlayerController()"));
+	//UE_LOG(LogGame, Error, TEXT("AStrategyPlayerController::AStrategyPlayerController()"));
 }
 
 void AStrategyPlayerController::SetupInputComponent()

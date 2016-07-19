@@ -248,12 +248,7 @@ void AStrategyHUD::BuildMenuWidgets()
 					}
 				}
 			}
-			// Setup the widget to forward focus to when the viewport receives focus.
-			TSharedPtr<SViewport> GameViewportWidget = GEngine->GetGameViewportWidget();
-			if(GameViewportWidget.IsValid())
-			{
-				GameViewportWidget->SetWidgetToFocusOnActivate(MyHUDMenuWidget);
-			}
+
 		}
 	}
 }
