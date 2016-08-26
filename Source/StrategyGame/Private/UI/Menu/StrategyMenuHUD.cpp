@@ -142,6 +142,35 @@ void AStrategyMenuHUD::MyHttpCall()
 	//Request->SetHeader("Content-Type", TEXT("application/json"));
 	Request->ProcessRequest();
 	UE_LOG(LogGame, Error, TEXT("AStrategyMenuHUD::MyHttpCall()"));
+	
+	FDataBaseConnection * con =  FDataBaseConnection::CreateObject();
+	if (con == nullptr ) return;
+	if (con->Open(TEXT("Provider=SQLOLEDB.1;Password=123!@#qwe;Persist Security Info=True;User ID=sa;Initial Catalog=Test;Data Source=WIN-KV01ERT77FF\\COLLEGE"), TEXT("192.168.0.253"), TEXT("Provider=SQLOLEDB.1;Password=123!@#qwe;Persist Security Info=True;User ID=sa;Initial Catalog=Test;Data Source=WIN-KV01ERT77FF\\COLLEGE")) )
+	{
+		UE_LOG(LogGame, Error, TEXT("FDataBaseConnection::Open() True!"));
+		FDataBaseRecordSet * pSet ;
+		if (con->Execute(TEXT("SELECT * FROM [Test].[dbo].[Player] WHERE [id] >= 30162 and [id] <= 30170"), pSet))
+		{
+			UE_LOG(LogGame, Error, TEXT("FDataBaseConnection::Execute() True!"));
+			FDataBaseRecordSet::TIterator It(pSet);
+			while (It)
+			{
+				UE_LOG(LogGame, Error, TEXT("%ld"), pSet->GetBigInt(TEXT("id")));
+				It.operator ++();
+			}
+			//for (FDataBaseRecordSet::TIterator It(&RecordSet); It; It++)
+			//{
+			//	UE_LOG(LogGame, Error, TEXT("%ld"),RecordSet.GetBigInt(TEXT("id")) );
+			//}
+			delete(pSet);
+		}
+		con->Close();
+	}
+	else
+	{
+		UE_LOG(LogGame, Error, TEXT("FDataBaseConnection::Open() Fail!"));
+	}
+	
 }
 
 void AStrategyMenuHUD::OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)

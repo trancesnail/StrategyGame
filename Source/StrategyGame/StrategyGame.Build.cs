@@ -15,7 +15,7 @@ public class StrategyGame : ModuleRules
                 "AIModule",
 				"GameplayTasks",
                 "WebBrowser",
-                "Http", "Json", "JsonUtilities","zlib",
+                "Http", "Json", "JsonUtilities","zlib","DatabaseSupport",
             }
 		);
 

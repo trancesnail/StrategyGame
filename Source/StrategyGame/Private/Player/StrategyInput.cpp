@@ -67,7 +67,7 @@ void UStrategyInput::UpdateGameKeys(float DeltaTime)
 		if (MyController->PlayerInput->Touches[i].Z != 0)
 		{
 			CurrentTouchState |= (1 << i);
-			//UE_LOG(LogGame, Error, TEXT("UpdateGameKeys()::CurrentTouchState:%d,PrevTouchState:%d"), CurrentTouchState, PrevTouchState);
+			UE_LOG(LogGame, Warning, TEXT("1.UpdateGameKeys()::CurrentTouchState:%X,PrevTouchState:%X"), CurrentTouchState, PrevTouchState);
 		}
 	}
 
@@ -90,7 +90,6 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 {
 	const float HoldTime = 0.3f;
 
-	//UE_LOG(LogGame, Error, TEXT("DetectOnePointActions()::bTwoPointsTouch:%d,bCurrentState:%d,bPrevState:%d,DeltaTime:%f,DownTime:%f,CurrentPosition is :%f-%f,AnchorPosition is :%f-%f"), bTwoPointsTouch, bCurrentState, bPrevState, DeltaTime, DownTime, CurrentPosition.X, CurrentPosition.Y, AnchorPosition.X, AnchorPosition.Y);
 	if (bCurrentState && !bTwoPointsTouch)
 	{
 		// just pressed? set anchor and zero time
@@ -98,6 +97,7 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 		{
 			DownTime = 0;
 			AnchorPosition = CurrentPosition;
+			UE_LOG(LogGame, Warning, TEXT("2.DetectOnePointActions()::AnchorPosition is :%f-%f"), AnchorPosition.X, AnchorPosition.Y);
 		}
 
 		// swipe detection & upkeep
@@ -107,13 +107,15 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 			SwipeState.Events[IE_Repeat]++;
 			SwipeState.Position = CurrentPosition;
 			SwipeState.DownTime = DownTime;
+			UE_LOG(LogGame, Warning, TEXT("3.DetectOnePointActions()::SwipeState.bDown ; SwipeState.Position is :%f-%f, SwipeState.DownTime is:%f"), CurrentPosition.X, CurrentPosition.Y, DownTime);
 		}
 		else if ((AnchorPosition - CurrentPosition).SizeSquared() > 0)
-			{
-				SwipeState.Events[IE_Pressed]++;
-				SwipeState.Position = AnchorPosition;
-				SwipeState.DownTime = DownTime;
-			}
+		{
+			SwipeState.Events[IE_Pressed]++;
+			SwipeState.Position = AnchorPosition;
+			SwipeState.DownTime = DownTime;
+			UE_LOG(LogGame, Warning, TEXT("4.DetectOnePointActions()::SwipeState.Position is :%f-%f, SwipeState.DownTime is:%f"), AnchorPosition.X, AnchorPosition.Y, DownTime);
+		}
 
 
 		// hold detection
@@ -123,6 +125,7 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 			HoldState.Events[IE_Pressed]++;
 			HoldState.Position = AnchorPosition;
 			HoldState.DownTime = DownTime;
+			UE_LOG(LogGame, Warning, TEXT("5.DetectOnePointActions()::SwipeState.Position is :%f-%f, SwipeState.DownTime is:%f"), AnchorPosition.X, AnchorPosition.Y, DownTime);
 		}
 
 		DownTime += DeltaTime;
@@ -139,6 +142,7 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 				TapState.Events[IE_Pressed]++;
 				TapState.Position = AnchorPosition;
 				TapState.DownTime = DownTime;
+				UE_LOG(LogGame, Warning, TEXT("6.DetectOnePointActions()::SwipeState.Position is :%f-%f, SwipeState.DownTime is:%f"), AnchorPosition.X, AnchorPosition.Y, DownTime);
 			}
 			else
 			{
@@ -148,6 +152,7 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 					HoldState.Events[IE_Released]++;
 					HoldState.Position = AnchorPosition;
 					HoldState.DownTime = DownTime;
+					UE_LOG(LogGame, Warning, TEXT("7.DetectOnePointActions()::SwipeState.Position is :%f-%f, SwipeState.DownTime is:%f"), AnchorPosition.X, AnchorPosition.Y, DownTime);
 				}
 			}
 
@@ -158,6 +163,7 @@ void UStrategyInput::DetectOnePointActions(bool bCurrentState, bool bPrevState, 
 				SwipeState.Events[IE_Released]++;
 				SwipeState.Position = CurrentPosition;
 				SwipeState.DownTime = DownTime;
+				UE_LOG(LogGame, Warning, TEXT("8.DetectOnePointActions()::SwipeState.Position is :%f-%f, SwipeState.DownTime is:%f"), SwipeState.Position.X, SwipeState.Position.Y, DownTime);
 			}
 		}
 	}

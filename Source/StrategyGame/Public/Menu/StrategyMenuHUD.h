@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Http.h"
+#include "Database.h"
 #include "StrategyMenuHUD.generated.h"
 
 
