@@ -23,7 +23,7 @@ AStrategyProjectile::AStrategyProjectile(const FObjectInitializer& ObjectInitial
 	CollisionComp->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CollisionComp->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
 	CollisionComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
-	CollisionComp->bCanEverAffectNavigation = false;
+	CollisionComp->SetCanEverAffectNavigation(false);
 	RootComponent = CollisionComp;
 
 	MovementComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
