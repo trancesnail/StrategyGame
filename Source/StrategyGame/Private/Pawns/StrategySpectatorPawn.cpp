@@ -39,12 +39,20 @@ void AStrategySpectatorPawn::SetupPlayerInputComponent(UInputComponent* InputCom
 
 void AStrategySpectatorPawn::MoveForward(float Val)
 {
+	if (Val == 0.f)
+	{
+		return;
+	}
 	StrategyCameraComponent->MoveForward( Val );
 }
 
 
 void AStrategySpectatorPawn::MoveRight(float Val)
 {
+	if (Val == 0.f)
+	{
+		return;
+	}
 	StrategyCameraComponent->MoveRight( Val );
 }
 

@@ -142,6 +142,7 @@ void UStrategyCameraComponent::MoveForward(float Val)
 
 			// transform to world space and add it
 			OwnerPawn->AddMovementInput(WorldSpaceAccel, Val);
+			UE_LOG(LogGame, Error, TEXT("MoveForward:%f"), Val);
 		}
 	}
 }
@@ -159,6 +160,7 @@ void UStrategyCameraComponent::MoveRight(float Val)
 
 			// transform to world space and add it
 			OwnerPawn->AddMovementInput(WorldSpaceAccel, Val);
+			UE_LOG(LogGame, Error, TEXT("MoveRight:%f"), Val);
 		}	
 	}
 }
