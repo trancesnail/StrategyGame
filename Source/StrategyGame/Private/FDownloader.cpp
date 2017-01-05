@@ -53,9 +53,9 @@ struct HTTPRequestDetails
 		m_Bucket = rBucket;
 		m_Host = FString::Printf(_T("%s.amazonaws.com"), *m_Service);
 		m_Region = "us-east-1";
-		FDateTime date = FDateTime::UtcNow();
-		m_DayOfYear = FString::Printf(_T("%04d%02d%02d"), date.GetYear(), date.GetMonth(), date.GetDay());
-		m_TimeOfDay = FString::Printf(_T("%02d%02d%02d"), date.GetHour(), date.GetMinute(), date.GetSecond());
+		FDateTime dateTemp = FDateTime::UtcNow();
+		m_DayOfYear = FString::Printf(_T("%04d%02d%02d"), dateTemp.GetYear(), dateTemp.GetMonth(), dateTemp.GetDay());
+		m_TimeOfDay = FString::Printf(_T("%02d%02d%02d"), dateTemp.GetHour(), dateTemp.GetMinute(), dateTemp.GetSecond());
 		m_DateString = FString::Printf(_T("%sT%sZ"), *m_DayOfYear, *m_TimeOfDay);
 	}
 

@@ -25,35 +25,40 @@ void AStrategySpectatorPawn::OnMouseScrollDown()
 }
 
 
-void AStrategySpectatorPawn::SetupPlayerInputComponent(UInputComponent* InputComponent)
+void AStrategySpectatorPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	check(InputComponent);
+	UE_LOG(LogGame, Error, TEXT("%s SpectatorPawn SetupInputComponent"), *PlayerInputComponent->GetOwner()->GetName());
+	check(PlayerInputComponent);
 	
-	InputComponent->BindAction("ZoomOut", IE_Pressed, this, &AStrategySpectatorPawn::OnMouseScrollUp);
-	InputComponent->BindAction("ZoomIn", IE_Pressed, this, &AStrategySpectatorPawn::OnMouseScrollDown);
+	PlayerInputComponent->BindAction("ZoomOut", IE_Pressed, this, &AStrategySpectatorPawn::OnMouseScrollUp);
+	PlayerInputComponent->BindAction("ZoomIn", IE_Pressed, this, &AStrategySpectatorPawn::OnMouseScrollDown);
 
-	InputComponent->BindAxis("MoveForward", this, &AStrategySpectatorPawn::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &AStrategySpectatorPawn::MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward", this, &AStrategySpectatorPawn::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &AStrategySpectatorPawn::MoveRight);
+	UE_LOG(LogGame, Error, TEXT("SpectatorPawn SetupInputComponent!"));
 }
 
 
 void AStrategySpectatorPawn::MoveForward(float Val)
 {
-	if (Val == 0.f)
-	{
-		return;
-	}
-	StrategyCameraComponent->MoveForward( Val );
+	StrategyCameraComponent->MoveForward(Val);
+	//if (Val != 0.f)
+	//{
+	//	FVector TankPos = this->GetActorLocation();
+	//	UE_LOG(LogGame, Error, TEXT("%s SpectatorPawn MoveForward Location %s!"), *GetName(), *TankPos.ToString());
+	//}
+	
 }
 
 
 void AStrategySpectatorPawn::MoveRight(float Val)
 {
-	if (Val == 0.f)
-	{
-		return;
-	}
-	StrategyCameraComponent->MoveRight( Val );
+	StrategyCameraComponent->MoveRight(Val);
+	//if (Val != 0.f)
+	//{
+	//	FVector TankPos = this->GetActorLocation();
+	//	UE_LOG(LogGame, Error, TEXT("%s SpectatorPawn MoveRight Location %s!"), *GetName(), *TankPos.ToString());
+	//}
 }
 
 UStrategyCameraComponent* AStrategySpectatorPawn::GetStrategyCameraComponent()

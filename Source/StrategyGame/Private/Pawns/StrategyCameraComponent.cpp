@@ -142,7 +142,6 @@ void UStrategyCameraComponent::MoveForward(float Val)
 
 			// transform to world space and add it
 			OwnerPawn->AddMovementInput(WorldSpaceAccel, Val);
-			UE_LOG(LogGame, Error, TEXT("MoveForward:%f"), Val);
 		}
 	}
 }
@@ -160,7 +159,6 @@ void UStrategyCameraComponent::MoveRight(float Val)
 
 			// transform to world space and add it
 			OwnerPawn->AddMovementInput(WorldSpaceAccel, Val);
-			UE_LOG(LogGame, Error, TEXT("MoveRight:%f"), Val);
 		}	
 	}
 }
@@ -207,7 +205,7 @@ void UStrategyCameraComponent::UpdateCameraBounds( const APlayerController* InPl
 		if (MyGameState)
 		{
 			FBox const& WorldBounds = MyGameState->WorldBounds;
-
+			UE_LOG(LogGame, Error, TEXT("WorldBounds:%s,FrustumRayDir:%s "), *WorldBounds.ToString(), *FrustumRayDir.ToString());
 			if (WorldBounds.GetSize() != FVector::ZeroVector)
 			{
 				const FVector WorldBoundPoints[] = {
@@ -223,7 +221,7 @@ void UStrategyCameraComponent::UpdateCameraBounds( const APlayerController* InPl
 
 				// get camera plane for intersections
 				const FPlane CameraPlane = FPlane(InPlayerController->GetFocalLocation(), FVector::UpVector);
-
+				UE_LOG(LogGame, Error, TEXT("CameraPlane:%s"), *CameraPlane.ToString());
 				// get matching points on camera plane
 				const FVector CameraPlanePoints[3] = {
 					FStrategyHelpers::IntersectRayWithPlane(WorldBoundPoints[0], FrustumRays[0], CameraPlane)*MiniMapBoundsLimit,
@@ -234,6 +232,7 @@ void UStrategyCameraComponent::UpdateCameraBounds( const APlayerController* InPl
 				// create new bounds
 				CameraMovementBounds = FBox(CameraPlanePoints, 3);
 				CameraMovementViewportSize = CurrentViewportSize;
+				UE_LOG(LogGame, Error, TEXT("CameraMovementBounds:%s "), *CameraMovementBounds.ToString());
 			}
 		}
 	}

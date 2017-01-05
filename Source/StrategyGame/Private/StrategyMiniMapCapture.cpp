@@ -56,7 +56,7 @@ void AStrategyMiniMapCapture::UpdateWorldBounds()
 
 		Points.Add(FVector(CamLocation.X+MaxVisibleDistance,CamLocation.Y+MaxVisibleDistance,GroundLevel));
 		Points.Add(FVector(CamLocation.X-MaxVisibleDistance,CamLocation.Y-MaxVisibleDistance,GroundLevel));
-
+		
 		MyGameState->WorldBounds = FBox(Points);
 		GetCaptureComponent2D()->UpdateContent();
 	}

@@ -84,10 +84,10 @@ void AStrategyPlayerController::GetAudioListenerPosition(FVector& OutLocation, F
 
 void AStrategyPlayerController::OnToggleInGameMenu()
 {
-	AStrategyHUD* const MyHUD = Cast<AStrategyHUD>(GetHUD());
-	if (MyHUD)
+	AStrategyHUD* const StrategyHUD = Cast<AStrategyHUD>(GetHUD());
+	if (StrategyHUD)
 	{
-		MyHUD->TogglePauseMenu();
+		StrategyHUD->TogglePauseMenu();
 	}
 }
 

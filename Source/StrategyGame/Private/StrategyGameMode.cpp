@@ -36,14 +36,14 @@ void AStrategyGameMode::InitGameState()
 {
 	Super::InitGameState();
 
-	AStrategyGameState* const GameState = GetGameState<AStrategyGameState>();
-	if (GameState)
+	AStrategyGameState* const StrategyGameState = GetGameState<AStrategyGameState>();
+	if (StrategyGameState)
 	{
 		EGameDifficulty::Type const NewDifficulty = (EGameDifficulty::Type) UGameplayStatics::GetIntOption(OptionsString, DifficultyOptionName, 0);
-		GameState->SetGameDifficulty(NewDifficulty);
+		StrategyGameState->SetGameDifficulty(NewDifficulty);
 
 		// start the game!
-		GameState->StartGameplayStateMachine();
+		StrategyGameState->StartGameplayStateMachine();
 	}
 }
 

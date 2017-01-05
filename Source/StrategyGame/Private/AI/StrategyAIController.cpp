@@ -81,9 +81,9 @@ uint8 AStrategyAIController::GetTeamNum() const
 	return (MyChar != NULL) ? MyChar->GetTeamNum() : EStrategyTeam::Unknown;
 }
 
-void AStrategyAIController::OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result)
+void AStrategyAIController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)
 {
-	if (CurrentAction != NULL && Result != EPathFollowingResult::Skipped)
+	if (CurrentAction != NULL && !Result.IsInterrupted() )
 	{
 		OnMoveCompletedDelegate.ExecuteIfBound();
 	}
