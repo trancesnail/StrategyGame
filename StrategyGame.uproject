@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{3C6C3079-4C25-AA6E-F044-ABB0EAFCBF2D}",
+	"EngineAssociation": "{655D1525-45D8-4EDC-35BC-83AD2F22ACE2}",
 	"Category": "Samples",
 	"Description": "",
 	"Modules": [
@@ -13,12 +13,6 @@
 			"Name": "StrategyGameLoadingScreen",
 			"Type": "Runtime",
 			"LoadingPhase": "PreLoadingScreen"
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "WebBrowserWidget",
-			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
